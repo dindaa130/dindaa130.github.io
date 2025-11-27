@@ -1,0 +1,223 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Promo Piscok Lumer</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <style>
+        body {
+    background: linear-gradient(135deg, #fff3e0, #ffe0b2);
+    font-family: 'Poppins', sans-serif;
+    color: #333;
+}
+
+/* NAVBAR */
+.navbar {
+    backdrop-filter: blur(10px);
+    background: rgba(0, 0, 0, 0.7) !important;
+    border-bottom: 2px solid rgba(255,255,255,0.2);
+}
+
+/* HERO */
+.hero {
+    background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.6)),
+                url('https://img.freepik.com/free-photo/chocolate-banana-spring-rolls_123827-23456.jpg') center/cover;
+    height: 75vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    text-align: center;
+}
+
+.hero h1 {
+    font-size: 3rem;
+    font-weight: 800;
+    animation: fadeIn 2s ease;
+}
+
+/* Section Title */
+.section-title {
+    font-weight: 700;
+    font-size: 2.2rem;
+    color: #e67e22;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+}
+.section-title::after {
+    content: "";
+    width: 60px;
+    height: 4px;
+    background: #e67e22;
+    display: block;
+    margin: 10px auto;
+    border-radius: 2px;
+}
+
+/* Card Produk */
+.card {
+    border: none;
+    border-radius: 20px;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(8px);
+    transition: 0.4s;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+.card:hover {
+    transform: translateY(-10px) scale(1.03);
+    box-shadow: 0 12px 28px rgba(0,0,0,0.2);
+}
+
+.card-img-top {
+    border-bottom: 5px solid #ffb74d;
+    height: 210px;
+    object-fit: cover;
+}
+
+/* Tombol */
+.btn-warning {
+    background: linear-gradient(45deg, #ffa726, #fb8c00);
+    border: none;
+    font-weight: 600;
+}
+.btn-warning:hover {
+    background: linear-gradient(45deg, #fb8c00, #ef6c00);
+    transform: scale(1.03);
+}
+
+/* Detail Produk */
+#detail {
+    background: white;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+.product-img {
+    width: 100%;
+    border-radius: 18px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+/* Back to Top */
+#topBtn {
+    background: linear-gradient(45deg, #ff9800, #e67e22);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+}
+#topBtn:hover {
+    background: linear-gradient(45deg, #e67e22, #d35400);
+}
+
+    </style>
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="#">Piscok Lumer</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#produk">Produk</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#detail">Detail Produk</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#penjual">Tentang Penjual</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section id="home" class="hero">
+        <h1 class="fw-bold display-4">Piscok Lumer – Enak, Murah, dan Bikin Nagih!</h1>
+    </section>
+
+    <!-- SEKILAS TENTANG TOKO -->
+    <section class="container py-5">
+
+        <h2 class="text-center mt-5 mb-4 fw-bold">Sekilas Tentang Toko</h2>
+        <p class="text-center w-75 mx-auto">Toko "Piscok Lumer Maknyus" berdiri sejak 2024 dan menjual berbagai varian piscok dengan harga terjangkau. Semua produk diolah fresh setiap hari!</p>
+    </section>
+
+    <!-- PRODUK LIST -->
+    <section id="produk" class="container py-5">
+        <h2 class="text-center fw-bold mb-4">Daftar Produk</h2>
+
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="card h-100">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-C-q4Q2LXNtKekG49dn2euLuI60L5ZspV9Q&s" class="card-img-top" alt="Piscok Original" />
+                    <div class="card-body">
+                        <h5 class="card-title fw-bold">Piscok Lumer Original</h5>
+                        <p class="card-text">Piscok klasik dengan kulit renyah dan isi coklat premium.</p>
+                        <a href="#detail" class="btn btn-dark w-100">Detail Produk</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card h-100">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpUIsURIeshw5rn6tNvdK1dtpEWRtGu5uAmA&s" class="card-img-top" alt="Piscok Coklat Keju" />
+                    <div class="card-body">
+                        <h5 class="card-title fw-bold">Piscok Coklat Keju</h5>
+                        <p class="card-text">Perpaduan lumer manis gurih antara coklat dan keju.</p>
+                        <a href="#detail" class="btn btn-dark w-100">Detail Produk</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card h-100">
+                    <img src="https://i.gojekapi.com/darkroom/gofood-indonesia/v2/images/uploads/709ef8ab-7f6f-44c0-b4ed-db4e9c40c9c1_Go-Biz_20230525_091959.jpeg?auto=format" class="card-img-top" alt="Piscok Strawberry" />
+                    <div class="card-body">
+                        <h5 class="card-title fw-bold">Piscok Strawberry</h5>
+                        <p class="card-text">Isi coklat dan selai strawberry yang segar dan manis.</p>
+                        <a href="#detail" class="btn btn-dark w-100">Detail Produk</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- DETAIL PRODUK -->
+    <section id="detail" class="container py-5">
+        <h2 class="text-center fw-bold mb-4">Detail Produk</h2>
+
+        <div class="row align-items-center g-4">
+            <div class="col-md-6">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTakLdJfkQNyuSNJg5nUanIIKS3LFPucym18w&s" class="product-img" alt="Piscok" />
+            </div>
+            <div class="col-md-6">
+                <h3 class="fw-bold">Piscok Lumer Original</h3>
+                <p>Piscok Lumer Original dibuat dari pisang pilihan, dibalut kulit crispy dan coklat premium yang lumer saat digigit.</p>
+                <p class="fw-bold">Harga: Rp 10.000 / porsi</p>
+                <a class="btn btn-success" href="https://wa.me/6281234567890?text=Halo%2C+saya+mau+piscok+lumer">Klik untuk Membeli</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- TENTANG PENJUAL -->
+    <section id="penjual" class="container py-5">
+        <h2 class="text-center fw-bold mb-4">Tentang Penjual</h2>
+
+        <div class="card p-4">
+            <h4 class="fw-bold">Piscok Lumer Maknyus</h4>
+            <p>Kami adalah UMKM kecil yang berfokus pada jajanan manis kekinian berbahan dasar pisang. Semua produk dibuat fresh setiap hari.</p>
+            <p><strong>Alamat:</strong> Jl. Mawar No. 12, Bandung</p>
+        </div>
+    </section>
+
+    <footer class="bg-dark text-white text-center py-3 mt-5">
+        <p class="m-0">&copy; 2025 Piscok Lumer Maknyus</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
