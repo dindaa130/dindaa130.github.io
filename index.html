@@ -1,223 +1,367 @@
-
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Promo Piscok Lumer</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <style>
-        body {
-    background: linear-gradient(135deg, #fff3e0, #ffe0b2);
-    font-family: 'Poppins', sans-serif;
-    color: #333;
-}
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Piscok Lumer — Premium Shop</title>
 
-/* NAVBAR */
-.navbar {
-    backdrop-filter: blur(10px);
-    background: rgba(0, 0, 0, 0.7) !important;
-    border-bottom: 2px solid rgba(255,255,255,0.2);
-}
+<!-- Bootstrap -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
-/* HERO */
-.hero {
-    background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.6)),
-                url('https://img.freepik.com/free-photo/chocolate-banana-spring-rolls_123827-23456.jpg') center/cover;
-    height: 75vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #fff;
-    text-align: center;
-}
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
-.hero h1 {
-    font-size: 3rem;
-    font-weight: 800;
-    animation: fadeIn 2s ease;
-}
+<style>
+  :root{
+    --bg: #fff8ef;
+    --card: #ffffff;
+    --text: #222;
+    --muted: #6c757d;
+    --accent: #ff9800;
+    --accent-dark: #e68900;
+    --success: #28a745;
+    --glass: rgba(255,255,255,0.6);
+  }
+  /* dark mode vars */
+  body.dark {
+    --bg: #0f1114;
+    --card: #0b0d10;
+    --text: #e7e7e8;
+    --muted: #b5b5b6;
+    --accent: #ffb74d;
+    --accent-dark: #ffa726;
+    --success: #41d28a;
+    --glass: rgba(255,255,255,0.04);
+  }
 
-/* Section Title */
-.section-title {
-    font-weight: 700;
-    font-size: 2.2rem;
-    color: #e67e22;
-    margin-bottom: 20px;
-    text-transform: uppercase;
-}
-.section-title::after {
-    content: "";
-    width: 60px;
-    height: 4px;
-    background: #e67e22;
-    display: block;
-    margin: 10px auto;
-    border-radius: 2px;
-}
+  html { scroll-behavior: smooth; }
 
-/* Card Produk */
-.card {
-    border: none;
-    border-radius: 20px;
-    overflow: hidden;
-    background: rgba(255, 255, 255, 0.7);
-    backdrop-filter: blur(8px);
-    transition: 0.4s;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-}
+  body{
+    margin:0;
+    font-family:'Poppins',sans-serif;
+    background: radial-gradient(circle at 10% 10%, rgba(255,243,224,0.6), transparent 10%), linear-gradient(180deg, var(--bg), #fff);
+    color:var(--text);
+    -webkit-font-smoothing:antialiased;
+  }
 
-.card:hover {
-    transform: translateY(-10px) scale(1.03);
-    box-shadow: 0 12px 28px rgba(0,0,0,0.2);
-}
+  /* ---------------------
+     Premium loading screen
+     --------------------- */
+  #loader {
+    position:fixed; inset:0; z-index:99999;
+    display:flex; align-items:center; justify-content:center; gap:18px; flex-direction:column;
+    background:linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.35));
+    transition:opacity .5s ease;
+  }
+  .loader-card{
+    width:140px; height:140px; border-radius:20px;
+    display:flex; align-items:center; justify-content:center;
+    background:linear-gradient(135deg,var(--accent),var(--accent-dark));
+    box-shadow:0 24px 60px rgba(0,0,0,0.45);
+    transform:scale(.98);
+  }
+  .loader-card h1{ color:white; margin:0; font-size:22px; letter-spacing:1px; }
+  .loader-ring{ width:56px; height:56px; border-radius:50%; border:6px solid rgba(255,255,255,0.12); border-top-color:rgba(255,255,255,0.95); animation:spin 1s linear infinite; }
+  @keyframes spin{ to{ transform:rotate(360deg);} }
 
-.card-img-top {
-    border-bottom: 5px solid #ffb74d;
-    height: 210px;
-    object-fit: cover;
-}
+  /* NAV */
+  .navbar { background: linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.4)); backdrop-filter: blur(6px); }
+  .brand-accent { color:var(--accent); font-weight:800; }
 
-/* Tombol */
-.btn-warning {
-    background: linear-gradient(45deg, #ffa726, #fb8c00);
-    border: none;
-    font-weight: 600;
-}
-.btn-warning:hover {
-    background: linear-gradient(45deg, #fb8c00, #ef6c00);
-    transform: scale(1.03);
-}
+  /* HERO - parallax */
+  .hero { position:relative; height:78vh; display:flex; align-items:center; justify-content:center; text-align:center; overflow:hidden; }
+  .hero__bg { position:absolute; inset:0; background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1pUEu5fZ06avzfPnrlEolSH2oyeO39W2agA&s'); background-size:cover; background-position:center; will-change:transform; filter:contrast(1.05) saturate(1.05) brightness(.75); transform:translateY(0); }
+  .hero__overlay { position:absolute; inset:0; background:linear-gradient(180deg, rgba(0,0,0,0.25), rgba(0,0,0,0.55)); }
+  .hero .container{ position:relative; z-index:2; }
+  .hero h1{ color:white; font-size:clamp(28px, 4.2vw, 48px); font-weight:800; text-shadow:0 10px 30px rgba(0,0,0,0.6); margin-bottom:10px; transform:translateY(0); }
+  .hero p{ color:rgba(255,255,255,0.95); }
 
-/* Detail Produk */
-#detail {
-    background: white;
-    padding: 40px;
-    border-radius: 20px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-}
+  /* Cards */
+  .card{ border:none; border-radius:14px; overflow:hidden; transition:transform .35s, box-shadow .35s; background:var(--card); }
+  .card:hover{ transform:translateY(-8px); box-shadow:0 20px 45px rgba(0,0,0,0.12); }
+  .card .card-img-top{ height:220px; object-fit:cover; transition:transform .4s; }
+  .card:hover .card-img-top{ transform:scale(1.06); }
 
-.product-img {
-    width: 100%;
-    border-radius: 18px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-}
+  .btn-accent{ background:linear-gradient(90deg,var(--accent),var(--accent-dark)); border:none; color:white; }
 
-/* Back to Top */
-#topBtn {
-    background: linear-gradient(45deg, #ff9800, #e67e22);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.25);
-}
-#topBtn:hover {
-    background: linear-gradient(45deg, #e67e22, #d35400);
-}
+  /* Reveal on scroll */
+  .reveal{ opacity:0; transform:translateY(24px); transition:all .75s cubic-bezier(.2,.9,.2,1); }
+  .reveal.in-view{ opacity:1; transform:translateY(0); }
 
-    </style>
+  /* Detail area */
+  #detailImg{ width:100%; border-radius:12px; box-shadow:0 14px 40px rgba(153, 60, 60, 0.12); transition:transform .45s ease, filter .45s ease; }
+  .glass{ background: linear-gradient(180deg, rgba(255,255,255,0.6), rgba(255,255,255,0.15)); padding:14px; border-radius:12px; box-shadow:0 8px 30px rgba(0,0,0,0.06); }
+
+  /* Checkout card */
+  .cart-item { display:flex; justify-content:space-between; align-items:center; gap:12px; padding:.6rem 0; border-bottom:1px dashed rgba(0,0,0,0.06); }
+
+  /* Responsive tweaks */
+  @media (max-width:767px){ .hero{ height:56vh; } .card .card-img-top{ height:180px; } }
+
+  /* Respect system dark mode immediately (visual only) */
+  @media (prefers-color-scheme: dark){
+    body { background: #7189ad; color:var(--text); }
+  }
+</style>
 </head>
 <body>
 
-    <!-- NAVBAR -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container">
-            <a class="navbar-brand fw-bold" href="#">Piscok Lumer</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#produk">Produk</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#detail">Detail Produk</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#penjual">Tentang Penjual</a></li>
-                </ul>
-            </div>
+  <!-- Loading screen -->
+  <div id="loader" aria-hidden="false">
+    <div class="loader-card"><h1>Piscok</h1></div>
+    <div class="loader-ring" aria-hidden="true"></div>
+  </div>
+
+  <!-- NAV -->
+  <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+    <div class="container">
+      <a class="navbar-brand" href="#home"><span class="brand-accent">Piscok</span> Lumer</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu"><span class="navbar-toggler-icon"></span></button>
+      <div class="collapse navbar-collapse" id="menu">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="#produk">Produk</a></li>
+          <li class="nav-item"><a class="nav-link" href="#detail">Detail</a></li>
+          <li class="nav-item"><a class="nav-link" href="#checkout">Checkout</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO (parallax) -->
+  <header class="hero" id="home">
+    <div class="hero__bg" id="heroBg"></div>
+    <div class="hero__overlay"></div>
+    <div class="container text-center">
+      <h1 class="reveal">Piscok Lumer — Coklat Lumer, Rasa Premium</h1>
+      <p class="lead reveal">Cemilan kekinian, dibuat fresh setiap hari. Nikmati varian rasa favoritmu.</p>
+      <div class="d-flex justify-content-center gap-3 mt-3 reveal">
+        <a href="#produk" class="btn btn-accent btn-lg">Lihat Produk</a>
+        <a href="#checkout" class="btn btn-outline-light btn-lg">Checkout</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container py-5">
+    <!-- Produk -->
+    <section id="produk" class="mb-5">
+      <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="fw-bold reveal">Produk Unggulan</h2>
+        <span class="badge bg-warning text-dark reveal">Fresh Daily</span>
+      </div>
+
+      <div class="row g-4" id="productGrid">
+        <!-- JS will inject product cards -->
+      </div>
+    </section>
+
+    <!-- Detail Produk Dinamis -->
+    <section id="detail" class="mb-5">
+      <h2 class="fw-bold mb-4 reveal">Detail Produk</h2>
+      <div class="row align-items-center" id="detailBox">
+        <div class="col-lg-6 mb-4 mb-lg-0">
+          <img id="detailImg" src="" alt="detail" />
         </div>
-    </nav>
-
-    <!-- HERO SECTION -->
-    <section id="home" class="hero">
-        <h1 class="fw-bold display-4">Piscok Lumer – Enak, Murah, dan Bikin Nagih!</h1>
-    </section>
-
-    <!-- SEKILAS TENTANG TOKO -->
-    <section class="container py-5">
-
-        <h2 class="text-center mt-5 mb-4 fw-bold">Sekilas Tentang Toko</h2>
-        <p class="text-center w-75 mx-auto">Toko "Piscok Lumer Maknyus" berdiri sejak 2024 dan menjual berbagai varian piscok dengan harga terjangkau. Semua produk diolah fresh setiap hari!</p>
-    </section>
-
-    <!-- PRODUK LIST -->
-    <section id="produk" class="container py-5">
-        <h2 class="text-center fw-bold mb-4">Daftar Produk</h2>
-
-        <div class="row g-4">
-            <div class="col-md-4">
-                <div class="card h-100">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-C-q4Q2LXNtKekG49dn2euLuI60L5ZspV9Q&s" class="card-img-top" alt="Piscok Original" />
-                    <div class="card-body">
-                        <h5 class="card-title fw-bold">Piscok Lumer Original</h5>
-                        <p class="card-text">Piscok klasik dengan kulit renyah dan isi coklat premium.</p>
-                        <a href="#detail" class="btn btn-dark w-100">Detail Produk</a>
-                    </div>
-                </div>
+        <div class="col-lg-6">
+          <div class="glass">
+            <h3 id="detailTitle" class="fw-bold">--</h3>
+            <p id="detailDesc" class="text-muted">--</p>
+            <p class="mb-1"><strong>Harga:</strong> <span id="detailPrice">-</span></p>
+            <div class="d-flex gap-2 mt-3">
+              <button class="btn btn-accent" id="detailAddBtn">Tambah ke Keranjang</button>
+              <a id="buyNowBtn" class="btn btn-success" target="_blank">Beli via WhatsApp</a>
             </div>
-
-            <div class="col-md-4">
-                <div class="card h-100">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpUIsURIeshw5rn6tNvdK1dtpEWRtGu5uAmA&s" class="card-img-top" alt="Piscok Coklat Keju" />
-                    <div class="card-body">
-                        <h5 class="card-title fw-bold">Piscok Coklat Keju</h5>
-                        <p class="card-text">Perpaduan lumer manis gurih antara coklat dan keju.</p>
-                        <a href="#detail" class="btn btn-dark w-100">Detail Produk</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4">
-                <div class="card h-100">
-                    <img src="https://i.gojekapi.com/darkroom/gofood-indonesia/v2/images/uploads/709ef8ab-7f6f-44c0-b4ed-db4e9c40c9c1_Go-Biz_20230525_091959.jpeg?auto=format" class="card-img-top" alt="Piscok Strawberry" />
-                    <div class="card-body">
-                        <h5 class="card-title fw-bold">Piscok Strawberry</h5>
-                        <p class="card-text">Isi coklat dan selai strawberry yang segar dan manis.</p>
-                        <a href="#detail" class="btn btn-dark w-100">Detail Produk</a>
-                    </div>
-                </div>
-            </div>
+            <div class="mt-3 small text-muted"><strong>Keterangan:</strong> <span id="detailNote">Fresh dibuat setiap hari.</span></div>
+          </div>
         </div>
+      </div>
     </section>
 
-    <!-- DETAIL PRODUK -->
-    <section id="detail" class="container py-5">
-        <h2 class="text-center fw-bold mb-4">Detail Produk</h2>
-
-        <div class="row align-items-center g-4">
-            <div class="col-md-6">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTakLdJfkQNyuSNJg5nUanIIKS3LFPucym18w&s" class="product-img" alt="Piscok" />
-            </div>
-            <div class="col-md-6">
-                <h3 class="fw-bold">Piscok Lumer Original</h3>
-                <p>Piscok Lumer Original dibuat dari pisang pilihan, dibalut kulit crispy dan coklat premium yang lumer saat digigit.</p>
-                <p class="fw-bold">Harga: Rp 10.000 / porsi</p>
-                <a class="btn btn-success" href="https://wa.me/6281234567890?text=Halo%2C+saya+mau+piscok+lumer">Klik untuk Membeli</a>
-            </div>
+    <!-- Checkout -->
+    <section id="checkout" class="mb-5">
+      <h2 class="fw-bold mb-4 reveal">Checkout — Keranjang & Pemesanan</h2>
+      <div class="row g-4">
+        <div class="col-lg-6">
+          <div class="card p-3">
+            <h5>Keranjang Anda</h5>
+            <div id="cartList" class="mb-3"></div>
+            <div class="d-flex justify-content-between align-items-center"><strong>Total:</strong><h5 id="cartTotal">Rp 0</h5></div>
+            <div class="mt-3"><button class="btn btn-accent w-100" onclick="proceedToForm()">Lanjut ke Form Pesanan</button></div>
+          </div>
         </div>
-    </section>
 
-    <!-- TENTANG PENJUAL -->
-    <section id="penjual" class="container py-5">
-        <h2 class="text-center fw-bold mb-4">Tentang Penjual</h2>
-
-        <div class="card p-4">
-            <h4 class="fw-bold">Piscok Lumer Maknyus</h4>
-            <p>Kami adalah UMKM kecil yang berfokus pada jajanan manis kekinian berbahan dasar pisang. Semua produk dibuat fresh setiap hari.</p>
-            <p><strong>Alamat:</strong> Jl. Mawar No. 12, Bandung</p>
+        <div class="col-lg-6">
+          <div class="card p-3">
+            <h5>Form Pemesanan</h5>
+            <form id="orderForm">
+              <div class="mb-2"><label class="form-label">Nama</label><input id="customerName" class="form-control" required></div>
+              <div class="mb-2"><label class="form-label">WhatsApp</label><input id="customerPhone" class="form-control" placeholder="628..." required></div>
+              <div class="mb-2"><label class="form-label">Alamat</label><textarea id="customerAddress" class="form-control" rows="3" required></textarea></div>
+              <div class="mb-2"><label class="form-label">Catatan</label><input id="orderNote" class="form-control"></div>
+              <div class="d-grid"><button type="submit" class="btn btn-success">Kirim Pesanan via WhatsApp</button></div>
+            </form>
+          </div>
         </div>
+      </div>
     </section>
 
-    <footer class="bg-dark text-white text-center py-3 mt-5">
-        <p class="m-0">&copy; 2025 Piscok Lumer Maknyus</p>
-    </footer>
+    <!-- About -->
+    <section id="penjual" class="mb-5 reveal">
+      <h2 class="fw-bold mb-3">Tentang Penjual</h2>
+      <div class="card p-3">
+        <div class="row">
+          <div class="col-md-8">
+            <h5 class="fw-bold">Piscok Lumer Maknyus</h5>
+            <p class="text-muted">UMKM spesialis piscok premium. Fresh daily. Melayani pesanan kecil & partai.</p>
+            <p><strong>Alamat:</strong> Jl. Mawar No.12, Balung</p>
+          </div>
+          <div class="col-md-4 d-flex align-items-center justify-content-end"><a class="btn btn-outline-primary" href="https://wa.me/6281234567890" target="_blank">Chat via WhatsApp</a></div>
+        </div>
+      </div>
+    </section>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  </main>
+
+  <footer class="text-center py-4"><small class="text-muted">© <span id="year"></span> Piscok Lumer — All rights reserved.</small></footer>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+/* ========= Data & State ========= */
+const PRODUCTS = [
+  { id:0, title:'Piscok Lumer Original', img:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRVbz4o23yAYS9BSJ07VESUy3-MWsU2AdzVrw&s', desc:'Pisang pilihan, kulit crispy, coklat premium lumer.', price:10000 },
+  { id:1, title:'Piscok Coklat Keju', img:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTsoLQTHKjUJQUJTdy_I6hsafnJb24oERdJxg&s', desc:'Perpaduan coklat & keju yang gurih.', price:12000 },
+  { id:2, title:'Piscok Strawberry', img:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRl7JW9tMMsBOVqCXE2AYG8XGdBQXuFLFjKgA&s', desc:'Coklat lumer berpadu selai strawberry segar.', price:13000 }
+];
+let cart = {}; let currentDetailId = 0;
+
+/* ======= Init page ======= */
+document.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('year').innerText = new Date().getFullYear();
+  renderProducts();
+  showDetailById(0, true);
+  onScrollReveal(); window.addEventListener('scroll', onScrollReveal);
+  window.addEventListener('scroll', heroParallax);
+
+  // hide loader shortly after page load
+  window.addEventListener('load', () => {
+    setTimeout(()=>{ const L=document.getElementById('loader'); if(L){ L.style.opacity='0'; setTimeout(()=>L.remove(),600); } }, 600);
+  });
+
+  // form submit
+  document.getElementById('orderForm').addEventListener('submit', submitOrder);
+});
+
+/* ======= Render product cards ======= */
+function renderProducts(){
+  const grid = document.getElementById('productGrid'); grid.innerHTML = '';
+  PRODUCTS.forEach(p=>{
+    const col = document.createElement('div'); col.className = 'col-md-4 reveal';
+    col.innerHTML = `
+      <div class="card h-100">
+        <img src="${p.img}" class="card-img-top" alt="${p.title}">
+        <div class="card-body">
+          <h5 class="fw-bold">${p.title}</h5>
+          <p class="text-muted small">${p.desc}</p>
+          <div class="d-grid gap-2">
+            <button class="btn btn-accent" onclick="addToCart(${p.id})">Tambah ke Keranjang</button>
+            <button class="btn btn-outline-secondary" onclick="showDetailById(${p.id})">Lihat Detail</button>
+          </div>
+        </div>
+      </div>`;
+    grid.appendChild(col);
+  });
+}
+
+/* ======= Detail dynamic ======= */
+function showDetailById(id, noScroll=false){
+  const p = PRODUCTS.find(x=>x.id===id); if(!p) return;
+  currentDetailId = id;
+  document.getElementById('detailImg').src = p.img;
+  document.getElementById('detailTitle').innerText = p.title;
+  document.getElementById('detailDesc').innerText = p.desc;
+  document.getElementById('detailPrice').innerText = 'Rp ' + formatNumber(p.price);
+  document.getElementById('detailAddBtn').onclick = ()=>addToCart(id);
+  document.getElementById('buyNowBtn').href = waLinkFor(p);
+  const img = document.getElementById('detailImg');
+  img.style.transform = 'scale(.98)'; img.style.filter = 'brightness(.98)';
+  setTimeout(()=>{ img.style.transform='scale(1)'; img.style.filter='brightness(1)'; }, 220);
+  if(!noScroll) document.getElementById('detail').scrollIntoView({ behavior: 'smooth' });
+}
+
+/* ======= WhatsApp link helper ======= */
+function waLinkFor(product){
+  const phone = '6281234567890'; // ganti dengan nomormu
+  const text = `Halo, saya mau pesan: ${product.title} - Rp ${formatNumber(product.price)}`;
+  return `https://wa.me/${phone}?text=${encodeURIComponent(text)}`;
+}
+
+/* ======= Cart logic ======= */
+function addToCart(id){ cart[id] = (cart[id]||0) + 1; updateCartUI(); flash('Ditambahkan ke keranjang'); }
+function removeFromCart(id){ delete cart[id]; updateCartUI(); }
+function changeQty(id, delta){ const q=(cart[id]||0)+delta; if(q<=0){ removeFromCart(id); return; } cart[id]=q; updateCartUI(); }
+function updateCartUI(){
+  const box = document.getElementById('cartList'); box.innerHTML = '';
+  let total = 0;
+  const keys = Object.keys(cart);
+  if(keys.length === 0){ box.innerHTML = '<div class="text-muted">Keranjang kosong</div>'; }
+  else {
+    keys.forEach(k=>{
+      const p = PRODUCTS.find(x=>x.id==k);
+      const qty = cart[k];
+      const sub = p.price * qty;
+      total += sub;
+      const item = document.createElement('div'); item.className = 'cart-item';
+      item.innerHTML = `<div><strong>${p.title}</strong><div class="text-muted small">Rp ${formatNumber(p.price)} × ${qty} = Rp ${formatNumber(sub)}</div></div>
+      <div class="btn-group">
+        <button class="btn btn-sm btn-outline-secondary" onclick="changeQty(${k}, -1)">-</button>
+        <button class="btn btn-sm btn-outline-secondary" onclick="changeQty(${k}, 1)">+</button>
+        <button class="btn btn-sm btn-danger" onclick="removeFromCart(${k})">Hapus</button>
+      </div>`;
+      box.appendChild(item);
+    });
+  }
+  document.getElementById('cartTotal').innerText = 'Rp ' + formatNumber(total);
+}
+
+/* ======= Checkout helpers ======= */
+function proceedToForm(){ location.href = '#checkout'; }
+function submitOrder(e){
+  e.preventDefault();
+  const name = document.getElementById('customerName').value.trim();
+  const phone = document.getElementById('customerPhone').value.trim();
+  const addr = document.getElementById('customerAddress').value.trim();
+  const note = document.getElementById('orderNote').value.trim();
+  const items = Object.keys(cart);
+  if(items.length === 0){ alert('Keranjang kosong.'); return; }
+  let message = `*Pesanan dari ${name}*%0AAlamat: ${addr}%0ANo: ${phone}%0A%0A*Daftar Pesanan*%0A`;
+  let total = 0;
+  items.forEach(id=>{
+    const p = PRODUCTS.find(x=>x.id==id);
+    const q = cart[id];
+    const sub = p.price * q;
+    total += sub;
+    message += `- ${p.title} × ${q} = Rp ${formatNumber(sub)}%0A`;
+  });
+  message += `%0ATotal: Rp ${formatNumber(total)}%0A%0ACatatan: ${note || '-'}%0A%0ATerima kasih.`;
+  const phoneTarget = '6281234567890'; // ganti nomor jika perlu
+  window.open(`https://wa.me/${phoneTarget}?text=${encodeURIComponent(message)}`, '_blank');
+  cart = {}; updateCartUI(); document.getElementById('orderForm').reset(); flash('Pesanan dikirim via WhatsApp');
+}
+
+/* ======= Utilities ======= */
+function formatNumber(n){ return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.'); }
+function flash(text){ const el=document.createElement('div'); el.style.position='fixed'; el.style.right='18px'; el.style.bottom='70px'; el.style.padding='12px 16px'; el.style.background='linear-gradient(90deg,var(--accent),var(--accent-dark))'; el.style.color='white'; el.style.borderRadius='10px'; el.style.boxShadow='0 8px 30px rgba(0,0,0,0.18)'; el.innerText=text; document.body.appendChild(el); setTimeout(()=>el.style.opacity=0,1800); setTimeout(()=>el.remove(),2200); }
+
+/* ======= Scroll reveal ======= */
+function onScrollReveal(){ document.querySelectorAll('.reveal').forEach(el=>{ const r = el.getBoundingClientRect(); if(r.top < window.innerHeight - 80) el.classList.add('in-view'); }); }
+
+/* ======= Parallax for hero (subtle) ======= */
+function heroParallax(){ const bg = document.getElementById('heroBg'); const scrolled = window.scrollY; bg.style.transform = `translateY(${scrolled * 0.22}px) scale(1.06)`; }
+
+/* ======= Loader hide fallback ======= */
+document.addEventListener('DOMContentLoaded', ()=>{ setTimeout(()=>{ const L=document.getElementById('loader'); if(L){ L.style.opacity = 0; setTimeout(()=>L.remove(), 600); } }, 800); });
+
+</script>
 </body>
 </html>
